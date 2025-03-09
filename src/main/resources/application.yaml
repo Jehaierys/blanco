@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: Blanco
+  datasource:
+    url: jdbc:postgresql://localhost:5432/blanco
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      auto-commit: true # what is it?
+      minimum-idle: 3
+      maximum-pool-size: 10
+      transaction-isolation: TRANSACTION_REPEATABLE_READ
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: postgresql
+
+# logging
+logging:
+  level:
+    root: INFO
+    org.springframework: DEBUG
+  file:
+    name: logs/app.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
