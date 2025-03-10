@@ -24,6 +24,7 @@ import java.math.BigDecimal;
         }
 )
 public class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq_gen")
     @SequenceGenerator(name = "account_seq_gen", sequenceName = "account_seq", allocationSize = 1)
@@ -38,4 +39,12 @@ public class Account {
     private BigDecimal balance;
     @Enumerated(EnumType.STRING)
     private Currency currency;
+
+    public Account(User user) {
+        this.setBalance(BigDecimal.ZERO);
+        this.setUser(user);
+        this.setCurrency(Currency.TENGE);
+
+        this.setCard(new Card());
+    }
 }

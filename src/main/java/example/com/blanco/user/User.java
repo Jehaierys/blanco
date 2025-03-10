@@ -30,9 +30,11 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_gen")
     @SequenceGenerator(
+            schema = "public",
             name = "user_seq_gen",
             sequenceName = "user_seq",
-            allocationSize = 3 // cache
+            initialValue = 1,
+            allocationSize = 1 // increment by
     )
     private Long id;
 
@@ -41,6 +43,10 @@ public class User implements UserDetails {
     private String phoneNumber;
 
     private String password;
+
+    private boolean nonLocked;
+
+    private boolean enabled;
 
     @OneToOne(
             cascade = CascadeType.ALL,
@@ -62,4 +68,31 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() { return email; }
+
+    /*
+        Non-locked by creation
+
+        Account might be locked
+        in case of criminal activity,
+        court order, etc.
+     */
+    @Override
+    public boolean isAccountNonLocked() { return this.nonLocked; }
+
+    /*
+        Account is disabled by creation
+        Enables after email or phone confirmation
+     */
+    @Override
+    public boolean isEnabled() { return this.enabled; }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+        this.role = Role.USER;
+        this.enabled = false;
+        this.nonLocked = true;
+
+        this.account = new Account(this);
+    }
 }

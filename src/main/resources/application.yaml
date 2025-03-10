@@ -16,6 +16,7 @@ spring:
       ddl-auto: update
     show-sql: true
     database: postgresql
+    #database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 # logging
 logging:
@@ -25,4 +26,5 @@ logging:
   file:
     name: logs/app.log
   pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    # console: %d{yyyy-MM-dd HH:mm:ss} [%level] %logger{36} - %msg%n
+
