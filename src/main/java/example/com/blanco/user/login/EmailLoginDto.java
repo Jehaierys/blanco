@@ -13,9 +13,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserLoginThroughEmail {
+public class UserLoginThroughEmailDto {
+
     @Email(message = "wrong email")
     private String email;
+
     @Size(
             min = 8,
             max = 24,
@@ -23,8 +25,14 @@ public class UserLoginThroughEmail {
     )
     private String password;
 
+    /*
+
+     */
     public User toUser() {
-        return new User(this.getEmail(), this.getPassword());
+        return new User(
+                this.getEmail(),
+                this.getPassword()
+        );
     }
 //    @Pattern(
 //            regexp = "^\\+?\\d{10,15}$",
