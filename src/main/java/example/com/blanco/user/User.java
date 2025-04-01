@@ -44,6 +44,10 @@ public class User implements UserDetails {
 
     private String password;
 
+    private boolean nonExpired;
+
+    private boolean credentialsNonExpired;
+
     private boolean nonLocked;
 
     private boolean enabled;
@@ -56,6 +60,7 @@ public class User implements UserDetails {
     @JsonBackReference
     private Account account;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Override
@@ -70,7 +75,26 @@ public class User implements UserDetails {
     public String getUsername() { return email; }
 
     /*
-        Non-locked by creation
+        true by creation
+
+        Returns false if this record (user)
+        is used for test purposes
+     */
+    @Override
+    public boolean isAccountNonExpired() {
+        return nonExpired;
+    }
+
+    /*
+        true by creation
+     */
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    /*
+        true by creation
 
         Account might be locked
         in case of criminal activity,
@@ -80,7 +104,8 @@ public class User implements UserDetails {
     public boolean isAccountNonLocked() { return this.nonLocked; }
 
     /*
-        Account is disabled by creation
+        false by creation
+
         Enables after email or phone confirmation
      */
     @Override
@@ -92,7 +117,7 @@ public class User implements UserDetails {
         this.role = Role.USER;
         this.enabled = false;
         this.nonLocked = true;
-
-        this.account = new Account(this);
+        this.nonExpired = true;
+        this.credentialsNonExpired = true;
     }
 }

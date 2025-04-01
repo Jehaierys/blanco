@@ -13,4 +13,8 @@ public class AccountService {
 
     private final AccountRepository accountRepo;
 
+    public Account getById(Long id) {
+        return accountRepo.getById(id);
+    }
+
 }

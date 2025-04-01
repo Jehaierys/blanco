@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Table(
         name = "accounts",
@@ -27,22 +26,31 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq_gen")
-    @SequenceGenerator(name = "account_seq_gen", sequenceName = "account_seq", allocationSize = 1)
-    private Integer id;
+    @SequenceGenerator(
+            schema = "public",
+            name = "account_seq_gen",
+            sequenceName = "account_seq",
+            initialValue = 1,
+            allocationSize = 1
+    )
+    private Long id;
+
     @OneToOne(
             mappedBy = "account"
     )
     @JsonManagedReference
     private User user;
+
     @Embedded
     private Card card;
+
     private BigDecimal balance;
+
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
-    public Account(User user) {
+    public Account() {
         this.setBalance(BigDecimal.ZERO);
-        this.setUser(user);
         this.setCurrency(Currency.TENGE);
 
         this.setCard(new Card());

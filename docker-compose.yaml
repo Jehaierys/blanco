@@ -1,0 +1,31 @@
+name: blanco
+services:
+  postgres:
+    image: postgres:16-bookworm
+    container_name: blanco_postgres
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: blanco
+  cache:
+    image: redis:7.4.2-bookworm
+    container_name: blanco_redis
+    ports:
+      - "6379"
+  mongo:
+    image: mongodb/mongodb-community-server:latest
+    container_name: blanco_mongo
+    ports:
+      - "27017"
+  app:
+    build:
+      dockerfile: ./Dockerfile
+    image: blanco_app
+    container_name: blanco_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - cache

@@ -13,30 +13,32 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserLoginThroughEmailDto {
+public class EmailLoginDto {
 
-    @Email(message = "wrong email")
+    @Email(
+            message = "Invalid email",
+            regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$\n"
+    )
     private String email;
 
     @Size(
             min = 8,
             max = 24,
-            message = "password length must be between 8 and 24"
+            message = "Password length must be between 8 and 24"
     )
     private String password;
 
-    /*
-
-     */
     public User toUser() {
         return new User(
-                this.getEmail(),
+                this.getEmail().toLowerCase(),
                 this.getPassword()
         );
     }
-//    @Pattern(
-//            regexp = "^\\+?\\d{10,15}$",
-//            message = "Invalid phone number format"
-//    )
-//    private String phoneNumber;
+
+    @Override
+    public String toString() {
+        return "{ " + this.getEmail() +
+                ", " + this.getPassword() +
+                " }";
+    }
 }

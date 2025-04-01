@@ -1,6 +1,8 @@
 spring:
   application:
     name: Blanco
+
+# postgres
   datasource:
     url: jdbc:postgresql://localhost:5432/blanco
     username: postgres
@@ -13,10 +15,14 @@ spring:
       transaction-isolation: TRANSACTION_REPEATABLE_READ
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
     database: postgresql
-    #database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    mongodb:
+      uri: mongodb://admin:secret@localhost:27017/admin
+
 
 # logging
 logging:
@@ -26,5 +32,10 @@ logging:
   file:
     name: logs/app.log
   pattern:
-    # console: %d{yyyy-MM-dd HH:mm:ss} [%level] %logger{36} - %msg%n
+    #console: %d{yyyy-MM-dd HH:mm:ss} [%level] %logger{36} - %msg%n
+
+
+
+
+
 

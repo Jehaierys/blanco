@@ -12,4 +12,14 @@ public class AccountRepository {
 
     private final EntityManager entityManager;
 
+    /*
+    what is it??????
+     */
+    public Account findByEmail(String email) {
+        return entityManager.find(Account.class, email);
+    }
+
+    public Account getById(Long id) {
+        return entityManager.find(Account.class, id);
+    }
 }

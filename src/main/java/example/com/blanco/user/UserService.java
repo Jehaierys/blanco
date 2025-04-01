@@ -1,6 +1,8 @@
 package example.com.blanco.user;
 
 
+import example.com.blanco.account.Account;
+import example.com.blanco.user.login.EmailLoginDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-    private UserRepository userRepo;
+    private final UserRepository userRepo;
 
     public List<User> allUsers() {
         return userRepo.findAll();
@@ -33,10 +35,19 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
     }
 
+    public Long getIdByEmail(String email) {
+        return userRepo.getIdByEmail(email);
+    }
+
     public User save(User user) {
         userRepo.save(user);
         return userRepo
                 .findByEmail(user.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + user.getEmail()));
     }
+
+    public void enableUserById(Long id) {
+        userRepo.enableUser(id);
+    }
+
 }
