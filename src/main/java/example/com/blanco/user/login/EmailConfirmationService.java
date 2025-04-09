@@ -62,7 +62,7 @@ public class EmailConfirmationService {
                 "                headers: {\n" +
                 "                    \"Content-Type\": \"application/json\"\n" +
                 "                },\n" +
-                "                body: JSON.stringify({ message: \"Подтверждение\" }) // Можно отправить нужные данные\n" +
+                "                body: JSON.stringify({ token: \"Подтверждение\" }) // Можно отправить нужные данные\n" +
                 "            });\n" +
                 "            if (response.ok) {\n" +
                 "                alert(\"Запрос успешно отправлен!\");\n" +
@@ -75,5 +75,15 @@ public class EmailConfirmationService {
                 "        }\n" +
                 "    });\n" +
                 "</script>";
+    }
+
+    // Assuming the token document has a 'userId' field and 'confirmationToken' field
+    public String getConfirmationTokenByUserId(Long userId) {
+        // Create a query to find the token by userId
+        Query query = new Query();
+        query.addCriteria(Criteria.where("user_id").is(userId));
+        log.info("here must be token: " + mongoTemplate.findOne(query, EmailConfirmationToken.class).getToken());
+        // Find the document and return the confirmation token
+        return mongoTemplate.findOne(query, EmailConfirmationToken.class).getToken();
     }
 }

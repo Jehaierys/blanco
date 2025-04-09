@@ -18,7 +18,7 @@ public class MongoConfig {
     @Bean
     public MongoTemplate mongoTemplate() {
         // Define the connection string
-        ConnectionString connectionString = new ConnectionString("mongodb://admin:secret@localhost:27017/admin");
+        ConnectionString connectionString = new ConnectionString("mongodb://admin:secret@blanco_mongo:27017/admin");
 
         // Build MongoClientSettings with the connection string and UUID representation
         MongoClientSettings settings = MongoClientSettings.builder()

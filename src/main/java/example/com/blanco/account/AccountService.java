@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Slf4j
 @Service
@@ -17,4 +19,7 @@ public class AccountService {
         return accountRepo.getById(id);
     }
 
+    public List<Account> allAccounts() {
+        return accountRepo.allAccounts();
+    }
 }

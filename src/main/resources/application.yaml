@@ -4,7 +4,7 @@ spring:
 
 # postgres
   datasource:
-    url: jdbc:postgresql://localhost:5432/blanco
+    url: jdbc:postgresql://blanco_postgres:5432/blanco
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
@@ -19,9 +19,9 @@ spring:
     show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  data:
-    mongodb:
-      uri: mongodb://admin:secret@localhost:27017/admin
+#  data:
+#    mongodb:
+#      uri: mongodb://admin:secret@localhost:27017/admin
 
 
 # logging

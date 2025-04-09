@@ -7,11 +7,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.SQLOutput;
 
-@SpringBootApplication
+
+@ComponentScan(basePackages = {"example.com.blanco.user.login", "example.com.blanco" })
+@SpringBootApplication(scanBasePackages = "example.com.blanco")
 public class BlancoApplication  {
 
     private static PasswordEncoder passwordEncoder;
@@ -51,10 +54,28 @@ public class BlancoApplication  {
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println("HITLER");
 //        loginController.login(new EmailLoginDto("kawaysempai@gmail.com", "GHDGHDGH"));
+//        Long one = 1L;
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println( "TOOOOOOOOOOOOOOO OOOOOOOOOOOOOOOOOOOOOOOOOO" +
+//                "OOOOOOOOKEN BYYY USER IDDDDDD");
+//        System.out.println(loginController.tokenByUserId(one));
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
+//        System.out.println();
     }
-
 }

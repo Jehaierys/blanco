@@ -61,9 +61,9 @@ public class LoginController {
         and enables user
      */
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/confirm/{token}")
+    @PutMapping("/confirm")
     public void confirmEmail(
-            @PathVariable String token
+            @RequestBody String token
     ) {
         EmailConfirmationToken confirmationToken = emailConfirmationService.findToken(token);
         if (
@@ -76,5 +76,11 @@ public class LoginController {
             // TODO: what if
             emailConfirmationService.deleteToken(confirmationToken);
         }
+    }
+
+    @DeleteMapping("/token/{id}")
+    public String tokenByUserId(@PathVariable Long id) {
+        log.info("HEEEREE must be user id: " + id);
+        return emailConfirmationService.getConfirmationTokenByUserId(id);
     }
 }

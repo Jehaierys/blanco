@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +23,11 @@ public class AccountController {
     @PreAuthorize("hasRole('ADMIN')")
     public Account findById(@PathVariable Long id) {
         return accountService.getById(id);
+    }
+
+    // TODO delete later
+    @GetMapping()
+    public List<Account> accounts() {
+        return accountService.allAccounts();
     }
 }

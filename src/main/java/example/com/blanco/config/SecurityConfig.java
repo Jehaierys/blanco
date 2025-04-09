@@ -56,6 +56,7 @@ public class SecurityConfig {
 //                                .requestMatchers("/**").hasRole("USER")
 //                                .requestMatchers("/ admin/**").hasRole("ADMIN")
                                 .requestMatchers("/**").permitAll()
+                                .requestMatchers("/login/**").permitAll()
                 )
 //                .cors((httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource()))
                 .logout((logout) ->

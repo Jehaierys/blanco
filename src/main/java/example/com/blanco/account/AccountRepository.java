@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Slf4j
 @Repository
 @RequiredArgsConstructor
@@ -17,6 +19,10 @@ public class AccountRepository {
      */
     public Account findByEmail(String email) {
         return entityManager.find(Account.class, email);
+    }
+
+    public List<Account> allAccounts() {
+        return entityManager.createNativeQuery("select * from accounts", Account.class).getResultList();
     }
 
     public Account getById(Long id) {
