@@ -42,4 +42,16 @@ public class Transfer {
     private ZonedDateTime timestamp;
 
     private float commission;
+
+
+    @Override
+    public String toString() {
+        return "transfer { " +
+                "sender: " + this.sender +
+                "receiver" + this.receiver +
+                "amount" + this.amount.toString() +
+                "zoneDateTime: " + timestamp +
+                "commission" + commission +
+                " }";
+    }
 }

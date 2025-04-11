@@ -1,0 +1,2 @@
+docker rmi blanco_app:latest || true
+docker build -t blanco_app:latest .
